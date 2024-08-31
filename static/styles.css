@@ -1,0 +1,300 @@
+
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --nav-link-color: #000000;
+  --footer-background-color: #e9ecef;
+  --footer-text-color: #000000;
+  --navbar-brand-color: #146C94;
+  --form-background-color: #ffffff;
+  --button-text-color: #ffffff;
+  --nav-brand-hover-color: #19A7CE;
+  --button-text-hover-color: #fefefe;
+  --input-focus-background-color: #fefefe;
+  --input-focus-text-color: #fefefe;
+  --blue-text-color: #146C94;
+  --message-bubble-color-send: #e9ecef;
+  --message-bubble-color-recv:#19A7CE;
+  --message-text-color-send: #146C94;
+  --message-text-color-recv: #ffffff;
+  --md-code-color: #000000;
+  --form-input-color: #000000;
+  --blue-text-hover: #19A7CE;
+
+
+
+
+} 
+
+body.dark {
+  --background-color: #1e1e1e; /* #9b59b6 */
+  --text-color: #fefefe;
+  --nav-link-color: #ffffff;
+  --footer-background-color: #343a40;
+  --footer-text-color: #fefefe;
+  --navbar-brand-color: #19A7CE;
+  --form-background-color: #1e1e1e;
+  --button-text-color: #000000;
+  --nav-brand-hover-color: #19A7CE;
+  --button-text-hover-color: #000;
+  --input-focus-background-color: #1e1e1e;
+  --input-focus-text-color: #fefefe;
+  --blue-text-color: #19A7CE;
+  --message-bubble-color-send: #343a40;
+  --message-bubble-color-recv:#19A7CE;
+  --message-text-color-send: #19A7CE;
+  --message-text-color-recv: #000000;
+  --md-code-color: #fefefe;
+  --form-input-color: #fefefe;
+
+}
+
+
+    /* Override md-block styles with specific CSS */
+    md-block code {
+      color: var(--md-code-color) !important; /* Change text color to blue */
+  }
+
+
+  /* Change the text color inside input fields */
+.form-control {
+  color: var(--form-input-color) !important; /* Change to your desired text color */
+  
+}
+
+.custom-border {
+  border: none; /* Initial border color set to transparent */
+}
+
+
+.custom-border:focus {
+  border: none; /* No border when focused */
+  outline: none; /* Remove default outline */
+  box-shadow: none; /* Remove any shadow effects that may appear */
+}
+  
+.more-color 
+{
+  color: var(--form-input-color);
+}
+
+.more-color:hover
+{
+  color: var(--form-input-color);
+}
+
+
+
+.flex-page {
+  flex-grow: 1; /* Ensure this row stretches to fill remaining space */
+  flex-direction:row;
+   /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+
+}
+
+.justified {
+  text-align: justify;
+}
+
+
+/* styles.css */
+.height-full {
+  /* CSS properties and values */
+  height: 100vh;
+}
+
+/* make the page not overflow the x axis*/
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+ 
+}
+
+.height-half {
+  height: 60vh;
+}
+
+/* Custom CSS */
+.custom-font {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+/* Custom CSS */
+.arial-font {
+  /*font-family: Arial, sans-serif; */
+  font-family: Verdana, sans-serif;
+}
+
+
+
+.footer-pos {
+  position: absolute;
+  bottom: 0;
+  width: 100%          /* Footer height */
+}
+
+
+.background-color-body {
+  background-color: var(--background-color); /* Replace #ff0000 with the color of your choice */
+}
+
+
+.footer-header-color {
+  background-color: #e9ecef;
+}
+
+
+.main-container-color {
+  background-color: #19A7CE;
+}
+
+.font-color-class {
+  color: var(--blue-text-color); /* Replace #0000ff with the color of your choice */
+}
+
+.heading-responsive-font {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+
+
+.list-group-item 
+{
+  background-color: var(--background-color) !important;
+}
+
+
+/* Base font size for all screens */
+.bio-responsive-font {
+  font-size: 14px; /* Base font size */
+}
+
+/* Media query for very small screens (phones) */
+@media screen and (max-width: 500px) {
+  .bio-responsive-font {
+    font-size: 16px; /* Font size for very small screens */
+  }
+}
+
+/* Media query for small phones */
+@media screen and (min-width: 501px) and (max-width: 767px) {
+  .bio-responsive-font {
+    font-size: 16px; /* Font size for small phones */
+  }
+}
+
+/* Media query for tablets */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .bio-responsive-font {
+    font-size: 13.5px; /* Font size for tablets */
+  }
+}
+
+/* Media query for larger tablets */
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+  .bio-responsive-font {
+    font-size: 18px; /* Font size for larger tablets */
+  }
+}
+
+/* Media query for laptops (including 1280x800) */
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+  .bio-responsive-font {
+    font-size: 22px; /* Font size for laptops */
+  }
+}
+
+/* Media query for desktops */
+@media screen and (min-width: 1440px) {
+  .bio-responsive-font {
+    font-size: 22px; /* Font size for desktops */
+  }
+}
+
+
+
+
+
+.bio-font {
+  font-family: 'Helvetica';
+  font-weight: 100;
+}
+
+.bio-desc
+{
+  font-family:Arial;
+  font-weight: 600;
+
+
+}
+
+
+.skills-responsive-font {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+
+.icon-color {
+  color:black;
+}
+
+.leetcode-icon
+{
+  margin-top: 0;
+}
+
+.hover-effect-leetcode:hover {
+  content: url(../static/images/icons/leetcode-color.svg); /* Change the image source on hover */
+}
+
+.hover-effect-kaggle:hover {
+  content: url(../static/images/icons/kaggle-color.svg); /* Change the image source on hover */
+}
+
+.hover-effect-github:hover {
+  content: url(../static/images/icons/github-color.svg); /* Change the image source on hover */
+}
+
+.hover-effect-linkedin:hover {
+  content: url(../static/images/icons/linkedin-color.svg); /* Change the image source on hover */
+}
+
+.hover-effect-gitlab:hover {
+  content: url(../static/images/icons/gitlab-color.svg); /* Change the image source on hover */
+}
+
+.social-media{
+  height: 40px;
+}
+
+.hover-download:hover {
+   /* Change the image source on hover */
+   text-decoration: none;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate {
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  transform-origin: bottom;
+}
+
+.bounce:hover {
+  animation-name: bounce;
+  animation-timing-function: ease;
+}
