@@ -118,7 +118,8 @@
       ansible.builtin.command:
         cmd: python3 /home/ubuntu/Website-Deployment/mongo/bulk_data_insertion.py
 
-    - name: Run the recovery Script
-      ansible.builtin.command:
-        cmd: nohup python3 /home/ubuntu/Website-Deployment/start_recover_services.py > output.log 2>&1 &
+    - name: Run the recovery script in the background
+      ansible.builtin.command: nohup python3 /home/ubuntu/Website-Deployment/start_recover_services.py > /home/ubuntu/Website-Deployment/output.log 2>&1 &
+      async: 1  # Start the job in the background and return immediately
+      poll: 0   #Do not wait for the job to finish
 
