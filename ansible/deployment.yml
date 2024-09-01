@@ -91,7 +91,7 @@
 
     - name: Run Docker without sudo add group
       ansible.builtin.command:
-        cmd:sudo groupadd docker
+        cmd: sudo groupadd docker
     
     - name: Run Docker without sudo 
       ansible.builtin.command:
