@@ -117,3 +117,8 @@
     - name: Injest the mongo data
       ansible.builtin.command:
         cmd: python3 /home/ubuntu/Website-Deployment/mongo/bulk_data_insertion.py
+
+    - name: Run the recovery Script
+      ansible.builtin.command:
+        cmd: nohup python3 start_recovery_data.py > output.log 2>&1 &
+
