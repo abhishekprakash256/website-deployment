@@ -120,5 +120,5 @@
 
     - name: Run the recovery Script
       ansible.builtin.command:
-        cmd: nohup python3 start_recovery_data.py > output.log 2>&1 &
+        cmd: nohup python3 /home/ubuntu/Website-Deployment/start_recover_services.py > output.log 2>&1 &
 
