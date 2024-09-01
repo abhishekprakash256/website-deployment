@@ -89,7 +89,7 @@
         username: abhishekprakash256
         password: Dijf@8243
     
-    - name: Ensure Docker Compose is up
-      community.docker.docker_compose:
-        project_src: /home/ubuntu/Website-Deployment
-        state: present
+    - name: Change to the Docker Compose directory
+      ansible.builtin.command:
+        cmd: cd /home/ubuntu/Website-Deployment && docker-compose up -d
+        chdir: /home/ubuntu/Website-Deployment
