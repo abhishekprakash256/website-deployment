@@ -91,4 +91,4 @@
     
     - name: Change to the Docker Compose directory
       ansible.builtin.command:
-        cmd: cd /home/ubuntu/Website-Deployment && sudo docker compose up -d
+        cmd: sudo docker compose up -d
