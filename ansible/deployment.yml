@@ -48,10 +48,7 @@
           - docker-buildx-plugin
           - docker-compose-plugin
         state: present
-        update_cache: yes
-
-    - name: Run docker compose up
-     
+        update_cache: yes 
     
     - name: Install NGINX
       apt:
