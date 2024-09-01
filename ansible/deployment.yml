@@ -88,6 +88,10 @@
       docker_login:
         username: abhishekprakash256
         password: Dijf@8243
+
+    - name: Run Docker without sudo add group
+      ansible.builtin.command:
+        cmd:sudo groupadd docker
     
     - name: Run Docker without sudo 
       ansible.builtin.command:
