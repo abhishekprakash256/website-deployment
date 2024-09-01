@@ -92,10 +92,12 @@
     - name: Run Docker without sudo add group
       ansible.builtin.command:
         cmd: sudo groupadd docker
-    
+      ignore_errors: yes
+        
     - name: Run Docker without sudo 
       ansible.builtin.command:
         cmd: sudo gpasswd -a $USER docker  
+      ignore_errors: yes
     
     - name: Change to the Docker Compose directory
       ansible.builtin.command:
