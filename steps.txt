@@ -76,7 +76,10 @@ sudo apt-get update
 
 -- run the conatainer or before
 -- injest the data 
--- 
+
+-- put the docker username and password 
+$ export DOCKERHUB_USERNAME="abhishekprakash256"
+$ export DOCKERHUB_PASSWORD="Dijf@8243"
 
 
 #run the ansisble playbook
