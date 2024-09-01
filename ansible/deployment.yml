@@ -79,8 +79,12 @@
         group: root
         mode: '0644'
       
-
     - name: Reload NGINX
       ansible.builtin.systemd:
         name: nginx
         state: reloaded
+    
+    - name: Ensure Docker Compose is up
+      community.docker.docker_compose:
+        project_src: /home/ubuntu/Website-Deployment
+        state: present
