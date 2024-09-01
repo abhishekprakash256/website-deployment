@@ -62,27 +62,32 @@
           - python3-certbot-nginx
         state: present
     
-    - name: Stop NGINX
-      ansible.builtin.systemd:
-        name: nginx
-        state: stopped
+    #- name: Stop NGINX
+    #  ansible.builtin.systemd:
+    #    name: nginx
+    #    state: stopped
 
-    - name: Obtain or renew SSL certificates with Certbot
-      command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
+    #- name: Obtain or renew SSL certificates with Certbot
+    #  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
       
     
-    - name : Copy the Nginx Conf file
-      ansible.builtin.copy:
-        src: /home/ubuntu/Website-Deployment/nginx-default.conf
-        dest: /etc/nginx/sites-available/default
-        owner: root
-        group: root
-        mode: '0644'
+    #- name : Copy the Nginx Conf file
+    #  ansible.builtin.copy:
+    #    src: /home/ubuntu/Website-Deployment/nginx-default.conf
+    #    dest: /etc/nginx/sites-available/default
+    #    owner: root
+    #    group: root
+    #    mode: '0644'
       
-    - name: Reload NGINX
-      ansible.builtin.systemd:
-        name: nginx
-        state: reloaded
+    #- name: Reload NGINX
+    #  ansible.builtin.systemd:
+    #    name: nginx
+    #    state: reloaded
+
+    - name: Log into DockerHub
+      docker_login:
+        username: abhishekprakash256
+        password: Dijf@8243
     
     - name: Ensure Docker Compose is up
       community.docker.docker_compose:
