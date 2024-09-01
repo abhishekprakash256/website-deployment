@@ -108,6 +108,12 @@
       ansible.builtin.command:
         cmd: sudo docker compose up -d
     
+    - name: Install pymongo for Python 3
+      apt:
+        name: python3-pymongo
+        state: present
+        update_cache: yes
+    
     - name: Injest the mongo data
       ansible.builtin.command:
         cmd: python3 /home/ubuntu/Website-Deployment/mongo/bulk_data_insertion.py
