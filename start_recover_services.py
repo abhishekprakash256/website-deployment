@@ -38,7 +38,7 @@ def backup_databases():
     print("Redis Backup: ", redis_backup)
     
     # Copy Redis backup file to host
-    redis_copy = subprocess.run(['docker cp redis:/data/dump.rdb ./redis-backups/dump.rdb'], shell=True, capture_output=True, text=True, check=True)
+    redis_copy = subprocess.run(['docker cp redis:/data/dump.rdb /home/ubuntu/Website-Deployment/redis-backups/dump.rdb'], shell=True, capture_output=True, text=True, check=True)
     print("Redis Backup Copy: ", redis_copy)
 
 
