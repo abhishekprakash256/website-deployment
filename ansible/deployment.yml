@@ -102,6 +102,7 @@
     - name: Change to the Docker Compose directory
       ansible.builtin.command:
         cmd: docker network create my_network
+      ignore_errors: yes
     
     - name: Change to the Docker Compose directory
       ansible.builtin.command:
