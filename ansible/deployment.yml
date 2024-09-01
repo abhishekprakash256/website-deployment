@@ -110,4 +110,4 @@
     
     - name: Injest the mongo data
       ansible.builtin.command:
-        cmd: python3 mongo/bulk_data_insertion.py
+        cmd: python3 /home/ubuntu/Website-Deployment/mongo/bulk_data_insertion.py
