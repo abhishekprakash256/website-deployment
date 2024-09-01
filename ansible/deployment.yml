@@ -89,6 +89,14 @@
         username: abhishekprakash256
         password: Dijf@8243
     
+    - name: Run Docker without sudo 
+      ansible.builtin.command:
+        cmd: sudo gpasswd -a $USER docker  
+    
+    - name: Change to the Docker Compose directory
+      ansible.builtin.command:
+        cmd: docker network create my_network
+    
     - name: Change to the Docker Compose directory
       ansible.builtin.command:
         cmd: sudo docker compose up -d
