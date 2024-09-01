@@ -1,18 +1,4 @@
-- name: Service Checks
-  hosts: ec2
-  become: yes
-
+- hosts: local
   tasks:
-    - name: Check server is up by pinging localhost
-      command: ping -c 4 localhost
-      register: ping_result
-
-    - name: Check redis service status with systemctl
-      shell: systemctl is-active redis-server || true
-      register: redis_service_status_systemctl  
-      ignore_errors: yes
-  
-    - name: Fail if Redis is inactive
-      ansible.builtin.fail:
-        msg: "Redis service is inactive!"
-      when: redis_service_status_systemctl.stdout == "inactive"
+    - name: Ping localhost
+      ping:

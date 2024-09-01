@@ -78,3 +78,6 @@ sudo apt-get update
 -- injest the data 
 -- 
 
+
+#run the ansisble playbook
+- ansible-playbook -i inventory.ini ansible/deployment.yml
