@@ -19,7 +19,7 @@ def install_ansible():
 
         # Run the get-pip.py script
         run_pip_script = subprocess.run(
-            ['python3 get-pip.py'], 
+            ['sudo apt install python3-pip'], 
             shell=True, capture_output=True, text=True, check=True
         )
         print(run_pip_script.stdout)
