@@ -64,7 +64,7 @@
     
     - name : Copy the Nginx Conf file
       ansible.builtin.copy:
-        src: /home/ubuntu/Website-Deploymen/nginx-default.conf
+        src: /home/ubuntu/Website-Deployment/nginx-default.conf
         dest: /etc/nginx/sites-available/default
         owner: root
         group: root
