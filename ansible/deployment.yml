@@ -69,7 +69,7 @@
 
     - name: Obtain or renew SSL certificates with Certbot
       command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
-      notify: Reload NGINX
+      
     
     - name : Copy the Nginx Conf file
       ansible.builtin.copy:
@@ -78,7 +78,7 @@
         owner: root
         group: root
         mode: '0644'
-      notify: Reload NGINX
+      
 
     - name: Reload NGINX
       ansible.builtin.systemd:
