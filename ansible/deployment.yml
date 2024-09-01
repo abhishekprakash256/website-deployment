@@ -86,8 +86,8 @@
 
     - name: Log into DockerHub
       docker_login:
-        username: abhishekprakash256
-        password: Dijf@8243
+        username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
+        password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
 
     - name: Run Docker without sudo add group
       ansible.builtin.command:
