@@ -78,8 +78,8 @@ sudo apt-get update
 -- injest the data 
 
 -- put the docker username and password 
-$ export DOCKERHUB_USERNAME="abhishekprakash256"
-$ export DOCKERHUB_PASSWORD="Dijf@8243"
+$ export DOCKERHUB_USERNAME="docker username"
+$ export DOCKERHUB_PASSWORD="docker password"
 
 
 #run the ansisble playbook
