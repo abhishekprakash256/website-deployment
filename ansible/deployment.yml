@@ -1,9 +1,32 @@
 - hosts: local
   become: true
   tasks:
-  
+
     - name: Ping localhost
       ping:
+
+    - name: Update apt package index
+          apt:
+            update_cache: yes
+
+        - name: Upgrade all packages to the latest version
+          apt:
+            upgrade: dist
+            update_cache: yes
+      
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - 
+        state: latest
+        update_cache: true
 
     - name: Add Docker GPG apt Key
       apt_key:
