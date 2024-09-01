@@ -40,7 +40,7 @@
         state: latest
         update_cache: true
     
-  - name: Install Docker and related packages
+    - name: Install Docker and related packages
       apt:
         pkg:
           - docker-ce-cli
