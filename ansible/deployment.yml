@@ -49,6 +49,9 @@
           - docker-compose-plugin
         state: present
         update_cache: yes
+
+    - name: Run docker compose up
+     
     
     - name: Install NGINX
       apt:
@@ -70,6 +73,11 @@
         group: root
         mode: '0644'
       notify: Reload NGINX
+    
+    - name: Stop NGINX
+      ansible.builtin.systemd:
+        name: nginx
+        state: stop
 
     - name: Obtain or renew SSL certificates with Certbot
       command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
