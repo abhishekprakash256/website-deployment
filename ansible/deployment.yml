@@ -74,7 +74,7 @@
     - name: Stop NGINX
       ansible.builtin.systemd:
         name: nginx
-        state: stop
+        state: stopped
 
     - name: Obtain or renew SSL certificates with Certbot
       command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
