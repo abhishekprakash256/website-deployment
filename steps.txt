@@ -77,7 +77,7 @@ sudo apt-get update
 -- run the conatainer or before
 -- injest the data 
 
--- put the docker username and password 
+-- put the docker username and password replace the vars in machine
 $ export DOCKERHUB_USERNAME="docker username"
 $ export DOCKERHUB_PASSWORD="docker password"
 
