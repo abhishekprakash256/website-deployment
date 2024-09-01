@@ -49,6 +49,15 @@
           - docker-compose-plugin
         state: present
         update_cache: yes
+    
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
 
-
-
+    - name: Install Certbot and the NGINX plugin
+      apt:
+        name:
+          - certbot
+          - python3-certbot-nginx
+        state: present
