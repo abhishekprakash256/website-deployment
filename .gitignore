@@ -1,0 +1,22 @@
+# Ignore environment variables file
+.env
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore compiled Java files
+*.class
+
+# Ignore IDE configuration files
+.vscode/
+
+
+#Ignore the backup files
+/redis-backups
+/mongo-backups
+/message-data
+
