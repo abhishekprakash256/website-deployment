@@ -1,4 +1,4 @@
-# Website Deployment README
+# Website Deployment
 
 ## Introduction
 
