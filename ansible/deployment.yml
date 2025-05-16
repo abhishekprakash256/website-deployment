@@ -1,7 +1,6 @@
 - hosts: ec2
   become: true
   tasks:
-
     - name: Ping localhost
       ping:
 
@@ -13,17 +12,15 @@
       apt:
         upgrade: dist
         update_cache: yes
-      
+
     - name: Install required system packages
       apt:
         pkg:
           - python3-pip
           - virtualenv
           - python3-setuptools
-
         state: latest
         update_cache: true
-
 
     - name: Install NGINX
       apt:
@@ -36,12 +33,46 @@
           - certbot
           - python3-certbot-nginx
         state: present
-    
 
-    - name: Stop NGINX
-      ansible.builtin.systemd:
-        name: nginx
-        state: stopped
+    - name: Ensure Git is installed
+      apt:
+        name: git
+        state: present
+        update_cache: true
+
+
+    - name: Clone the private GitHub repository
+      git:
+        repo: 'git@github.com:abhishekprakash256/hash-utils.git'
+        dest: /home/ubuntu/hash-utils
+        version: main
+        accept_hostkey: yes
+
+    
+    #- name: Stop NGINX
+    #  ansible.builtin.systemd:
+    #    name: nginx
+    #    state: stopped
+ 
+    - name: Add GitHub to known hosts
+      become: true
+      become_user: ubuntu
+      shell: ssh-keyscan github.com >> /home/ubuntu/.ssh/known_hosts
+      args:
+        creates: /home/ubuntu/.ssh/known_hosts
+
+ 
+    - name: Clone the private GitHub repository
+      git:
+        repo: 'git@github.com:abhishekprakash256/hash-utils.git'
+        dest: /home/ubuntu/hash-utils
+        version: main
+        accept_hostkey: yes
+        key_file: /home/ubuntu/.ssh/id_rsa
+      become: true
+      become_user: ubuntu
+
+
 
 
 
