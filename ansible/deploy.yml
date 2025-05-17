@@ -15,7 +15,7 @@
     - name: Upgrade all packages to the latest version
       apt:
         upgrade: dist
-        update_cache: yes
+        update_cache: yes  
 
 
     - name: Install required system packages
@@ -27,9 +27,9 @@
         state: latest
         update_cache: true
   
-    #- name : Run Nginx file and configure
-    #  ansible.builtin.include_tasks:
-    #    file: provision-steps/nginx.yml
+    - name : Run Nginx file and configure
+      ansible.builtin.include_tasks:
+        file: provision-steps/nginx.yml
 
     - name: Make git configurartion
       ansible.builtin.include_tasks:
