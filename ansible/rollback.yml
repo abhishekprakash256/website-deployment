@@ -2,7 +2,7 @@
   become: true
 
   vars : 
-    global_venv : /opt/global-venv
+    global_venv : /home/ubuntu/.venvs/global
 
   tasks:
     - name: Ping localhost

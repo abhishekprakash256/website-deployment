@@ -89,4 +89,4 @@ $ export DOCKERHUB_PASSWORD="docker password"
 
 
 active the virtual env
-source /opt/global-venv/bin/activate
+source /home/ubuntu/.venvs/global/bin/activate

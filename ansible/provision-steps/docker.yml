@@ -43,3 +43,4 @@
   reboot:
     msg: "Rebooting the system to apply Docker group membership"
     pre_reboot_delay: 5
+

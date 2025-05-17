@@ -1,7 +1,7 @@
 - hosts: ec2
   become: true
   vars : 
-    global_venv : /opt/global-venv
+    global_venv : /home/ubuntu/.venvs/global
 
   tasks:
     - name: Ping localhost
@@ -35,14 +35,34 @@
       ansible.builtin.include_tasks:
         file: provision-steps/setup-git.yml
 
+
+    - name: Ensure venv parent directory exists
+      become: true
+      file:
+        path: /home/ubuntu/.venvs
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+
     - name: Create global virtual environment
+      become: true
+      become_user: ubuntu
       command: virtualenv {{ global_venv }}
       args:
         creates: "{{ global_venv }}"
 
+
     - name : Run the docker setup file 
       ansible.builtin.include_tasks:
         file: provision-steps/docker.yml
+
+    - name : Run the docker continer
+      ansible.builtin.include_tasks:
+        file: provision-steps/docker-container.yml
+    
+
 
     
 
