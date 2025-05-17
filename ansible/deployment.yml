@@ -61,6 +61,16 @@
         accept_hostkey: yes
         key_file: /home/ubuntu/.ssh/id_rsa
 
+    #copy the inhestion file 
+    - name: Copy the bulk data ingestion file
+      ansible.builtin.copy:
+        src: /home/abhi/Github/website-deployment/test_data.json
+        dest: /home/ubuntu/
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+
 
 
     #asnible working for reopo clone 
