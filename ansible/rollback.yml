@@ -1,0 +1,10 @@
+- hosts: ec2
+  become: true
+  tasks:
+    - name: Ping localhost
+      ping:
+    
+
+    
+
+    

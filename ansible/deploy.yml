@@ -1,0 +1,29 @@
+- hosts: ec2
+  become: true
+  tasks:
+    - name: Ping localhost
+      ping:
+
+    - name: Update apt package index
+      apt:
+        update_cache: yes
+
+
+    - name: Upgrade all packages to the latest version
+      apt:
+        upgrade: dist
+        update_cache: yes
+
+
+    - name: Install required system packages
+      apt:
+        pkg:
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name : Run Nginx file and configure
+      include : provision/ng/nginx.yml
+

@@ -1,0 +1,30 @@
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+
+- name: Install Certbot and the NGINX plugin
+  apt:
+    name:
+      - certbot
+      - python3-certbot-nginx
+    state: present
+
+
+- name: Obtain or renew SSL certificates with Certbot
+  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
+      
+    
+- name : Copy the Nginx Conf file
+  ansible.builtin.copy:
+    src: /home/ubuntu/website-deployment/nginx-default.conf
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: '0644'
+      
+
+- name: Reload NGINX
+  ansible.builtin.systemd:
+    name: nginx
+    state: reloaded

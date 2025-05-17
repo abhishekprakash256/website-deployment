@@ -1,0 +1,42 @@
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Stop NGINX service
+      ansible.builtin.systemd:
+        name: nginx
+        state: stopped
+        enabled: no
+
+    - name: Remove Certbot SSL certificates (optional)
+      ansible.builtin.file:
+        path: "/etc/letsencrypt/live/meabhi.me"
+        state: absent
+
+    - name: Remove Certbot config and renewal files
+      ansible.builtin.file:
+        path: "/etc/letsencrypt/renewal/meabhi.me.conf"
+        state: absent
+
+    - name: Remove Certbot log files (optional cleanup)
+      ansible.builtin.file:
+        path: "/var/log/letsencrypt"
+        state: absent
+
+    - name: Uninstall Certbot and the NGINX plugin
+      apt:
+        name:
+          - certbot
+          - python3-certbot-nginx
+        state: absent
+        purge: yes
+        autoremove: yes
+        update_cache: yes
+
+    - name: Uninstall NGINX
+      apt:
+        name: nginx
+        state: absent
+        purge: yes
+        autoremove: yes
+        update_cache: yes
