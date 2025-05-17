@@ -40,14 +40,6 @@
         state: present
         update_cache: true
 
-
-    - name: Clone the private GitHub repository
-      git:
-        repo: 'git@github.com:abhishekprakash256/hash-utils.git'
-        dest: /home/ubuntu/hash-utils
-        version: main
-        accept_hostkey: yes
-
     
     #- name: Stop NGINX
     #  ansible.builtin.systemd:
@@ -61,16 +53,26 @@
       args:
         creates: /home/ubuntu/.ssh/known_hosts
 
- 
-    - name: Clone the private GitHub repository
-      git:
+
+    - name: Clone a repo with separate git directory
+      ansible.builtin.git:
         repo: 'git@github.com:abhishekprakash256/hash-utils.git'
         dest: /home/ubuntu/hash-utils
-        version: main
         accept_hostkey: yes
         key_file: /home/ubuntu/.ssh/id_rsa
-      become: true
-      become_user: ubuntu
+
+
+
+    #asnible working for reopo clone 
+    #- name: Clone the private GitHub repository
+    #  git:
+    #    repo: 'git@github.com:abhishekprakash256/hash-utils.git'
+    #    dest: /home/ubuntu/hash-utils
+    #    version: main
+    #    accept_hostkey: yes
+    #    key_file: /home/ubuntu/.ssh/id_rsa
+    #  become: true
+    #  become_user: ubuntu
 
 
 
