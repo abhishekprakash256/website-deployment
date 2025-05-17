@@ -5,7 +5,8 @@
       ping:
 
     - name : Rollback Nginx
-      include : rollback-provision/rollback-nginx.yml
+      ansible.builtin.include_tasks:
+        file : rollback-provision-steps/rollback-nginx.yml
     
 
 

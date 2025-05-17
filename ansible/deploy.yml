@@ -25,5 +25,6 @@
         update_cache: true
 
     - name : Run Nginx file and configure
-      include : provision/ng/nginx.yml
+      ansible.builtin.include_tasks:
+        file: provision-steps/nginx.yml
 
