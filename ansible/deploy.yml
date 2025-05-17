@@ -1,5 +1,8 @@
 - hosts: ec2
   become: true
+  vars : 
+    global_venv : /opt/global-venv
+
   tasks:
     - name: Ping localhost
       ping:
@@ -23,8 +26,23 @@
           - python3-setuptools
         state: latest
         update_cache: true
+  
+    #- name : Run Nginx file and configure
+    #  ansible.builtin.include_tasks:
+    #    file: provision-steps/nginx.yml
 
-    - name : Run Nginx file and configure
+    - name: Make git configurartion
       ansible.builtin.include_tasks:
-        file: provision-steps/nginx.yml
+        file: provision-steps/setup-git.yml
+
+    - name: Create global virtual environment
+      command: virtualenv {{ global_venv }}
+      args:
+        creates: "{{ global_venv }}"
+
+    - name : Run the docker setup file 
+      ansible.builtin.include_tasks:
+        file: provision-steps/docker.yml
+
+    
 

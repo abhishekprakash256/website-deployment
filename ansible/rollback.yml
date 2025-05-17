@@ -1,13 +1,29 @@
 - hosts: ec2
   become: true
+
+  vars : 
+    global_venv : /opt/global-venv
+
   tasks:
     - name: Ping localhost
       ping:
 
-    - name : Rollback Nginx
-      ansible.builtin.include_tasks:
-        file : rollback-provision-steps/rollback-nginx.yml
+    #- name : Rollback Nginx
+    #  ansible.builtin.include_tasks:
+    #    file : rollback-provision-steps/rollback-nginx.yml
     
+    - name: Rollback Git
+      ansible.builtin.include_tasks:
+        file : rollback-provision-steps/rollback-git.yml
+
+    - name: Remove global virtual environment
+      file:
+        path: "{{ global_venv }}"
+        state: absent
+    
+    - name : Remove Docker 
+      ansible.builtin.include_tasks:
+        file: rollback-provision-steps/rollback-docker.yml
 
 
 

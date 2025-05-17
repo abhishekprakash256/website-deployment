@@ -1,0 +1,17 @@
+- name: Remove private SSH key
+  ansible.builtin.file:
+    path: /home/ubuntu/.ssh/id_rsa
+    state: absent
+
+- name: Remove public SSH key
+  ansible.builtin.file:
+    path: /home/ubuntu/.ssh/id_rsa.pub
+    state: absent
+
+- name: Remove GitHub from known_hosts
+  ansible.builtin.lineinfile:
+    path: /home/ubuntu/.ssh/known_hosts
+    regexp: '^github\.com'
+    state: absent
+  become_user: ubuntu
+  ignore_errors: true

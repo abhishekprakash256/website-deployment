@@ -1,0 +1,45 @@
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu jammy stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: Install Docker and related packages
+  apt:
+    pkg:
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+    update_cache: yes 
+
+- name: Ensure docker group exists
+  group:
+    name: docker
+    state: present
+
+- name: Add ubuntu user to docker group
+  user:
+    name: ubuntu
+    groups: docker
+    append: yes
+
+- name: Create Docker network
+  command: docker network create my_network
+  ignore_errors: yes
+
+- name: Reboot the server to apply docker group changes
+  reboot:
+    msg: "Rebooting the system to apply Docker group membership"
+    pre_reboot_delay: 5
