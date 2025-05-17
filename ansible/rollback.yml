@@ -3,8 +3,11 @@
   tasks:
     - name: Ping localhost
       ping:
+
+    - name : Rollback Nginx
+      include : rollback-provision/rollback-nginx.yml
     
 
-    
+
 
     
