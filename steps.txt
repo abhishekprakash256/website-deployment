@@ -109,3 +109,11 @@ StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
+
+
+
+sudo cp /home/ubuntu/personal-portfolio-frontend.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable personal-portfolio-frontend
+sudo systemctl start personal-portfolio-frontend
+sudo systemctl status personal-portfolio-frontend

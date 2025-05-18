@@ -11,17 +11,27 @@
     npm run build
     
 - name : Copy the personal portfolio frontend service file
+  become: true
   ansible.builtin.copy:
-    src: /files/personal-portfolio-frontend.service
+    src: /home/ubuntu/personal-portfolio-frontend/personal-portfolio-frontend.service
     dest: /etc/systemd/system/personal-portfolio-frontend.service
     owner: root
     group: root
     mode: '0644'
 
-- name: Reload and start systemd service for personal portfolio frontend
+- name: Reload systemd daemon
   become: true
-  systemd:
-    name: personal-portfolio
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable the portfolio service
+  become: true
+  ansible.builtin.systemd:
+    name: personal-portfolio-frontend
     enabled: true
-    state: restarted
-    daemon_reload: yes
+
+- name: Start the portfolio service
+  become: true
+  ansible.builtin.systemd:
+    name: personal-portfolio-frontend
+    state: started
