@@ -1,0 +1,15 @@
+- name: Stop the systemd service
+  ansible.builtin.systemd:
+    name: personal-portfolio-frontend
+    state: stopped
+    enabled: false
+  ignore_errors: true
+
+- name: Remove the systemd service file
+  ansible.builtin.file:
+    path: /etc/systemd/system/personal-portfolio-frontend.service
+    state: absent
+
+- name: Reload systemd daemon after service removal
+  ansible.builtin.systemd:
+    daemon_reload: true

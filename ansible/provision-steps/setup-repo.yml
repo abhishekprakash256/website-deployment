@@ -15,6 +15,7 @@
   ansible.builtin.copy:
     src: /home/ubuntu/personal-portfolio-frontend/personal-portfolio-frontend.service
     dest: /etc/systemd/system/personal-portfolio-frontend.service
+    remote_src: yes
     owner: root
     group: root
     mode: '0644'
