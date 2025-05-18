@@ -1,12 +1,21 @@
 # This is the file for repo setup to install dependicies and build the repo if need in virtual env
 
-- name: Set up and start the personal portfolio frontend
+- name: Set up and install the personal portfolio frontend
   become: true
   become_user: ubuntu
   args:
     chdir: /home/ubuntu/personal-portfolio-frontend
   shell: |
     rm -rf .next node_modules package-lock.json
+    npm install
+    npm run build
+
+- name: Set up and install the api gateway service
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/api-gateway-service
+  shell: |
     npm install
     npm run build
 
@@ -36,6 +45,18 @@
     owner: root
     group: root
     mode: '0644'
+
+
+- name : Copy the api gateway service file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/api-gateway-service/api-gateway.service
+    dest: /etc/systemd/system/api-gateway.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
 
 - name : Copy the Mongo access service file
   become: true
@@ -90,6 +111,20 @@
   become: true
   ansible.builtin.systemd:
     name: static-media-server
+    state: started
+
+
+- name: Enable the api gateway service
+  become: true
+  ansible.builtin.systemd:
+    name: api-gateway
+    enabled: true
+
+
+- name: Enable the api gateway service
+  become: true
+  ansible.builtin.systemd:
+    name: api-gateway
     state: started
 
 
