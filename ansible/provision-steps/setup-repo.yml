@@ -140,3 +140,19 @@
   ansible.builtin.systemd:
     name: personal-portfolio-frontend
     state: started
+
+
+- name : Copy the data file for mongo ingestion
+  ansible.builtin.copy:
+    src: files/test_data.json
+    dest: /home/ubuntu/mongo-ingestion-and-testing/test_data.json
+    owner: ubuntu
+    group: ubuntu
+    mode: '0600'
+  
+- name: Data crud operation for mongo ingestion
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/mongo-ingestion-and-testing
+  shell: /home/ubuntu/.venvs/global/bin/python3 data_crud.py
