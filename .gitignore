@@ -20,5 +20,6 @@ __pycache__/
 /mongo-backups
 /message-data
 /ansible/files
+/ansible/files/blog
 
 
