@@ -90,3 +90,22 @@ $ export DOCKERHUB_PASSWORD="docker password"
 
 active the virtual env
 source /home/ubuntu/.venvs/global/bin/activate
+
+
+[Unit]
+Description=Personal Portfolio Frontend (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/personal-portfolio-frontend
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

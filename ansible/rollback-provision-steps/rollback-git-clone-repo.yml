@@ -19,3 +19,8 @@
     path: /home/ubuntu/static-media-server
     state: absent
 
+- name: Remove the mongo ingestion and testing repository
+  ansible.builtin.file: 
+    path: /home/ubuntu/mongo-ingestion-and-testing
+    state: absent
+

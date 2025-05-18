@@ -1,0 +1,27 @@
+# This is the file for repo setup to install dependicies and build the repo if need in virtual env
+
+- name: Set up and start the personal portfolio frontend
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/personal-portfolio-frontend
+  shell: |
+    rm -rf .next node_modules package-lock.json
+    npm install
+    npm run build
+    
+- name : Copy the personal portfolio frontend service file
+  ansible.builtin.copy:
+    src: /files/personal-portfolio-frontend.service
+    dest: /etc/systemd/system/personal-portfolio-frontend.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Reload and start systemd service for personal portfolio frontend
+  become: true
+  systemd:
+    name: personal-portfolio
+    enabled: true
+    state: restarted
+    daemon_reload: yes

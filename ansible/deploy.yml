@@ -24,6 +24,7 @@
           - python3-pip
           - virtualenv
           - python3-setuptools
+          - npm
         state: latest
         update_cache: true
   
@@ -65,6 +66,10 @@
     - name : Run the Git repo clone file
       ansible.builtin.include_tasks:
         file: provision-steps/git-clone-repo.yml
+
+    - name : Run the setup repo file
+      ansible.builtin.include_tasks:
+        file: provision-steps/setup-repo.yml
     
 
 
