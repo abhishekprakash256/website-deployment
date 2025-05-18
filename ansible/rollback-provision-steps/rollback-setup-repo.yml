@@ -5,9 +5,21 @@
     enabled: false
   ignore_errors: true
 
-- name: Remove the systemd service file
+- name: Stop the mongo access service
+  ansible.builtin.systemd:
+    name: mongo-access
+    state: stopped
+    enabled: false
+  ignore_errors: true
+
+- name: Remove the systemd service file for personal portfolio frontend
   ansible.builtin.file:
     path: /etc/systemd/system/personal-portfolio-frontend.service
+    state: absent
+
+- name: Remove the systemd service file for mongo access service
+  ansible.builtin.file:
+    path: /etc/systemd/system/mongo-access.service
     state: absent
 
 - name: Reload systemd daemon after service removal

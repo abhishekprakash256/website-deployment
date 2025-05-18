@@ -9,7 +9,8 @@
     rm -rf .next node_modules package-lock.json
     npm install
     npm run build
-    
+
+
 - name : Copy the personal portfolio frontend service file
   become: true
   ansible.builtin.copy:
@@ -20,16 +21,52 @@
     group: root
     mode: '0644'
 
+
+- name: Install Python dependencies in virtualenv
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/mongo-access-service
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
+
+- name : Copy the Mongo access service file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/mongo-access-service/mongo-access.service
+    dest: /etc/systemd/system/mongo-access.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
 - name: Reload systemd daemon
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
+
+
+- name: Enable the mongo access service
+  become: true
+  ansible.builtin.systemd:
+    name: mongo-access
+    enabled: true
+
+
+- name: Start the mongo access service
+  become: true
+  ansible.builtin.systemd:
+    name: mongo-access
+    state: started
+
 
 - name: Enable the portfolio service
   become: true
   ansible.builtin.systemd:
     name: personal-portfolio-frontend
     enabled: true
+
 
 - name: Start the portfolio service
   become: true
