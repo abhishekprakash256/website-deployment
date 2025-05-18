@@ -12,6 +12,13 @@
     enabled: false
   ignore_errors: true
 
+- name: Stop the static media server service
+  ansible.builtin.systemd:
+    name: static-media-server
+    state: stopped
+    enabled: false
+  ignore_errors: true
+
 - name: Remove the systemd service file for personal portfolio frontend
   ansible.builtin.file:
     path: /etc/systemd/system/personal-portfolio-frontend.service
@@ -20,6 +27,11 @@
 - name: Remove the systemd service file for mongo access service
   ansible.builtin.file:
     path: /etc/systemd/system/mongo-access.service
+    state: absent
+
+- name: Remove the systemd service file for static media server
+  ansible.builtin.file:
+    path: /etc/systemd/system/static-media-server.service
     state: absent
 
 - name: Reload systemd daemon after service removal

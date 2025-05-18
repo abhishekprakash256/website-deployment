@@ -11,6 +11,22 @@
     npm run build
 
 
+- name: Install Python dependencies in virtualenv for mongo access service
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/mongo-access-service
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
+
+- name: Install Python dependencies in virtualenv for static media server
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/static-media-server
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
+
 - name : Copy the personal portfolio frontend service file
   become: true
   ansible.builtin.copy:
@@ -21,20 +37,22 @@
     group: root
     mode: '0644'
 
-
-- name: Install Python dependencies in virtualenv
-  become: true
-  become_user: ubuntu
-  args:
-    chdir: /home/ubuntu/mongo-access-service
-  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
-
-
 - name : Copy the Mongo access service file
   become: true
   ansible.builtin.copy:
     src: /home/ubuntu/mongo-access-service/mongo-access.service
     dest: /etc/systemd/system/mongo-access.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name : Copy the media static server file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/static-media-server/static-media-server.service
+    dest: /etc/systemd/system/static-media-server.service
     remote_src: yes
     owner: root
     group: root
@@ -58,6 +76,20 @@
   become: true
   ansible.builtin.systemd:
     name: mongo-access
+    state: started
+
+
+- name: Enable the static media server service
+  become: true
+  ansible.builtin.systemd:
+    name: static-media-server
+    enabled: true
+
+
+- name: Start the static media server service
+  become: true
+  ansible.builtin.systemd:
+    name: static-media-server
     state: started
 
 
