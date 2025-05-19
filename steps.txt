@@ -84,3 +84,36 @@ $ export DOCKERHUB_PASSWORD="docker password"
 
 #run the ansisble playbook
 - ansible-playbook -i inventory.ini ansible/deployment.yml
+ - ansible-playbook -i inventory.ini ansible/deploy.yml
+-  ansible-playbook -i inventory.ini ansible/rollback.yml
+
+
+active the virtual env
+source /home/ubuntu/.venvs/global/bin/activate
+
+
+[Unit]
+Description=Personal Portfolio Frontend (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/personal-portfolio-frontend
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+sudo cp /home/ubuntu/personal-portfolio-frontend.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable personal-portfolio-frontend
+sudo systemctl start personal-portfolio-frontend
+sudo systemctl status personal-portfolio-frontend

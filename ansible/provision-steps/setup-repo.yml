@@ -1,0 +1,158 @@
+# This is the file for repo setup to install dependicies and build the repo if need in virtual env
+
+- name: Set up and install the personal portfolio frontend
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/personal-portfolio-frontend
+  shell: |
+    rm -rf .next node_modules package-lock.json
+    npm install
+    npm run build
+
+- name: Set up and install the api gateway service
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/api-gateway-service
+  shell: |
+    npm install
+    npm run build
+
+
+- name: Install Python dependencies in virtualenv for mongo access service
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/mongo-access-service
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
+
+- name: Install Python dependencies in virtualenv for static media server
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/static-media-server
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
+
+- name : Copy the personal portfolio frontend service file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/personal-portfolio-frontend/personal-portfolio-frontend.service
+    dest: /etc/systemd/system/personal-portfolio-frontend.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name : Copy the api gateway service file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/api-gateway-service/api-gateway.service
+    dest: /etc/systemd/system/api-gateway.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name : Copy the Mongo access service file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/mongo-access-service/mongo-access.service
+    dest: /etc/systemd/system/mongo-access.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name : Copy the media static server file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/static-media-server/static-media-server.service
+    dest: /etc/systemd/system/static-media-server.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name: Reload systemd daemon
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+
+- name: Enable the mongo access service
+  become: true
+  ansible.builtin.systemd:
+    name: mongo-access
+    enabled: true
+
+
+- name: Start the mongo access service
+  become: true
+  ansible.builtin.systemd:
+    name: mongo-access
+    state: started
+
+
+- name: Enable the static media server service
+  become: true
+  ansible.builtin.systemd:
+    name: static-media-server
+    enabled: true
+
+
+- name: Start the static media server service
+  become: true
+  ansible.builtin.systemd:
+    name: static-media-server
+    state: started
+
+
+- name: Enable the api gateway service
+  become: true
+  ansible.builtin.systemd:
+    name: api-gateway
+    enabled: true
+
+
+- name: Enable the api gateway service
+  become: true
+  ansible.builtin.systemd:
+    name: api-gateway
+    state: started
+
+
+- name: Enable the portfolio service
+  become: true
+  ansible.builtin.systemd:
+    name: personal-portfolio-frontend
+    enabled: true
+
+
+- name: Start the portfolio service
+  become: true
+  ansible.builtin.systemd:
+    name: personal-portfolio-frontend
+    state: started
+
+
+- name : Copy the data file for mongo ingestion
+  ansible.builtin.copy:
+    src: files/test_data.json
+    dest: /home/ubuntu/mongo-ingestion-and-testing/test_data.json
+    owner: ubuntu
+    group: ubuntu
+    mode: '0600'
+  
+- name: Data crud operation for mongo ingestion
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/mongo-ingestion-and-testing
+  shell: /home/ubuntu/.venvs/global/bin/python3 data_crud.py
