@@ -91,6 +91,7 @@ $ export DOCKERHUB_PASSWORD="docker password"
 active the virtual env
 source /home/ubuntu/.venvs/global/bin/activate
 
+curl http://localhost:5000/blog/section/project/federated-learning/federated-learning-flow.png
 
 [Unit]
 Description=Personal Portfolio Frontend (Next.js)
