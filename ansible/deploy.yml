@@ -67,6 +67,15 @@
       ansible.builtin.include_tasks:
         file: provision-steps/git-clone-repo.yml
 
+    - name : Copy the static media server service file
+      become: true
+      ansible.builtin.copy:
+        src: blog/
+        dest: /home/ubuntu/static-media-server/blog/
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
     - name : Run the setup repo file
       ansible.builtin.include_tasks:
         file: provision-steps/setup-repo.yml
