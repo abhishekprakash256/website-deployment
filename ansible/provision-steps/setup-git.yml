@@ -1,0 +1,22 @@
+- name: Copy private SSH key
+  ansible.builtin.copy:
+    src: files/id_rsa
+    dest: /home/ubuntu/.ssh/id_rsa
+    owner: ubuntu
+    group: ubuntu
+    mode: '0600'
+
+- name: Copy public SSH key
+  ansible.builtin.copy:
+    src: files/id_rsa.pub
+    dest: /home/ubuntu/.ssh/id_rsa.pub
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
+
+- name: Add GitHub to known hosts
+  become: true
+  become_user: ubuntu
+  shell: ssh-keyscan github.com >> /home/ubuntu/.ssh/known_hosts
+  args:
+    creates: /home/ubuntu/.ssh/known_hosts

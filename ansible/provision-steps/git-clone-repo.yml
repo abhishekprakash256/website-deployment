@@ -1,0 +1,39 @@
+# The repo to clone - personla portfoilio front end , api gateway service , mongo access service , static media service
+
+- name: Git Clone the personal portfolio frontend repository
+  ansible.builtin.git:
+    repo: 'git@github.com:abhishekprakash256/personal-portfolio-frontend.git'
+    dest: /home/ubuntu/personal-portfolio-frontend
+    version: main
+  become_user: ubuntu
+
+- name: Git Clone the Api Gateway Service repository
+  ansible.builtin.git:
+    repo: 'git@github.com:abhishekprakash256/api-gateway-service.git'
+    dest: /home/ubuntu/api-gateway-service
+    version: main
+  become_user: ubuntu
+
+
+- name: Git Clone the Mongo Access Service repository
+  ansible.builtin.git:
+    repo: 'git@github.com:abhishekprakash256/mongo-access-service.git'
+    dest: /home/ubuntu/mongo-access-service
+    version: main
+  become_user: ubuntu
+
+
+- name: Git Clone the static media server repository
+  ansible.builtin.git:
+    repo: 'git@github.com:abhishekprakash256/static-media-server.git'
+    dest: /home/ubuntu/static-media-server
+    version: main
+  become_user: ubuntu
+
+
+- name: Git Clone the mongo ingestion and testing
+  ansible.builtin.git:
+    repo: 'git@github.com:abhishekprakash256/mongo-ingestion-and-testing.git'
+    dest: /home/ubuntu/mongo-ingestion-and-testing
+    version: main
+  become_user: ubuntu

@@ -1,0 +1,11 @@
+- name: Run MongoDB container
+  become: true
+  community.docker.docker_container:
+    name: mongo
+    image: mongo:latest
+    state: started
+    restart_policy: unless-stopped
+    networks:
+      - name: my_network
+    published_ports:
+      - "27017:27017"

@@ -1,0 +1,58 @@
+- name: Stop all Docker containers
+  shell: docker ps -q | xargs -r docker stop
+  ignore_errors: true
+
+- name: Remove all Docker containers
+  shell: docker ps -a -q | xargs -r docker rm
+  ignore_errors: true
+
+- name: Check if Docker network exists
+  become: true
+  command: docker network ls --filter name=my_network -q
+  register: network_check
+  changed_when: false
+
+- name: Remove Docker network if present
+  become: true
+  command: docker network rm my_network
+  when: network_check.stdout != ""
+
+- name: Stop Docker service
+  ansible.builtin.systemd:
+    name: docker
+    state: stopped
+    enabled: false
+  ignore_errors: yes
+
+- name: Remove Docker packages
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: absent
+    purge: yes
+    autoremove: yes
+  ignore_errors: yes
+
+- name: Remove Docker APT repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu jammy stable
+    state: absent
+  ignore_errors: yes
+
+- name: Remove Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: absent
+  ignore_errors: yes
+
+- name: Delete Docker group
+  group:
+    name: docker
+    state: absent
+  ignore_errors: yes
+
+

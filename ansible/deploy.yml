@@ -1,0 +1,80 @@
+- hosts: ec2
+  become: true
+  vars : 
+    global_venv : /home/ubuntu/.venvs/global
+
+  tasks:
+    - name: Ping localhost
+      ping:
+
+    - name: Update apt package index
+      apt:
+        update_cache: yes
+
+
+    - name: Upgrade all packages to the latest version
+      apt:
+        upgrade: dist
+        update_cache: yes  
+
+
+    - name: Install required system packages
+      apt:
+        pkg:
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - npm
+        state: latest
+        update_cache: true
+  
+    #- name : Run Nginx file and configure
+    #  ansible.builtin.include_tasks:
+    #    file: provision-steps/nginx.yml
+
+    - name: Make git configurartion
+      ansible.builtin.include_tasks:
+        file: provision-steps/setup-git.yml
+
+
+    - name: Ensure venv parent directory exists
+      become: true
+      file:
+        path: /home/ubuntu/.venvs
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+
+    - name: Create global virtual environment
+      become: true
+      become_user: ubuntu
+      command: virtualenv {{ global_venv }}
+      args:
+        creates: "{{ global_venv }}"
+
+
+    - name : Run the docker setup file 
+      ansible.builtin.include_tasks:
+        file: provision-steps/docker.yml
+
+    - name : Run the docker continer
+      ansible.builtin.include_tasks:
+        file: provision-steps/docker-container.yml
+    
+    - name : Run the Git repo clone file
+      ansible.builtin.include_tasks:
+        file: provision-steps/git-clone-repo.yml
+
+    - name : Run the setup repo file
+      ansible.builtin.include_tasks:
+        file: provision-steps/setup-repo.yml
+
+
+    
+    
+
+
+    
+
