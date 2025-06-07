@@ -9,3 +9,17 @@
       - name: my_network
     published_ports:
       - "27017:27017"
+
+
+
+- name: Run Redis container
+  become: true
+  community.docker.docker_container:
+    name: redis
+    image: redis:latest
+    state: started
+    restart_policy: unless-stopped
+    networks:
+      - name: my_network
+    published_ports:
+      - "6379:6379"

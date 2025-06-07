@@ -83,8 +83,8 @@ $ export DOCKERHUB_PASSWORD="docker password"
 
 
 #run the ansisble playbook
-- ansible-playbook -i inventory.ini ansible/deployment.yml -vvv
- - ansible-playbook -i inventory.ini ansible/deploy.yml -vvv
+- ansible-playbook -i inventory.ini ansible/deployment.yml -vvv  #not working anymore
+- ansible-playbook -i inventory.ini ansible/deploy.yml -vvv
 -  ansible-playbook -i inventory.ini ansible/rollback.yml -vvv
 
 
