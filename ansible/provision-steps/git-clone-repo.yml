@@ -37,3 +37,11 @@
     dest: /home/ubuntu/mongo-ingestion-and-testing
     version: main
   become_user: ubuntu
+
+
+- name: Git Clone the mongo tinyurl service repository
+  ansible.builtin.git:
+    repo: 'git@github.com:abhishekprakash256/tinyurl-service.git'
+    dest: /home/ubuntu/tinyurl-service
+    version: main
+  become_user: ubuntu

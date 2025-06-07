@@ -26,6 +26,14 @@
     enabled: false
   ignore_errors: true
 
+
+- name: Stop the tinyurl service
+  ansible.builtin.systemd:
+    name: tinyurl-server
+    state: stopped
+    enabled: false
+  ignore_errors: true
+
 - name: Remove the systemd service file for personal portfolio frontend
   ansible.builtin.file:
     path: /etc/systemd/system/personal-portfolio-frontend.service
@@ -45,6 +53,12 @@
   ansible.builtin.file:
     path: /etc/systemd/system/static-media-server.service
     state: absent
+
+- name: Remove the systemd service file for tinyurl service
+  ansible.builtin.file: 
+    path: /etc/systemd/system/tinyurl-server.service
+    state: absent
+  ignore_errors: true
 
 - name: Reload systemd daemon after service removal
   ansible.builtin.systemd:

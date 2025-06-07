@@ -36,6 +36,14 @@
   shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
 
 
+- name: Install Python dependencies in virtualenv for tinyurl service
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/tinyurl-service
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
+
 - name : Copy the personal portfolio frontend service file
   become: true
   ansible.builtin.copy:
@@ -74,6 +82,18 @@
   ansible.builtin.copy:
     src: /home/ubuntu/static-media-server/static-media-server.service
     dest: /etc/systemd/system/static-media-server.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+
+- name : Copy the tinyurl service file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/tinyurl-service/tinyurl-server.service
+    dest: /etc/systemd/system/tinyurl-server.service
     remote_src: yes
     owner: root
     group: root
@@ -139,6 +159,21 @@
   become: true
   ansible.builtin.systemd:
     name: personal-portfolio-frontend
+    state: started
+
+
+
+- name: Enable the tinyurl service
+  become: true
+  ansible.builtin.systemd:
+    name: tinyurl-server
+    enabled: true
+
+
+- name: Start the tinyurl
+  become: true
+  ansible.builtin.systemd:
+    name: tinyurl-server
     state: started
 
 

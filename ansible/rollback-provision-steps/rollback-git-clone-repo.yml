@@ -24,3 +24,7 @@
     path: /home/ubuntu/mongo-ingestion-and-testing
     state: absent
 
+- name: Remove the tinyurl service repository
+  ansible.builtin.file: 
+    path: /home/ubuntu/tinyurl-service
+    state: absent
