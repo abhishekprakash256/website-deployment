@@ -1,20 +1,20 @@
 # The following playbook installs NGINX, Certbot, and the NGINX plugin for Certbot, obtains SSL certificates, and configures NGINX to use them.
 
-- name: Install NGINX
-  apt:
-    name: nginx
-    state: present
+#- name: Install NGINX
+#  apt:
+#    name: nginx
+#    state: present
 
-- name: Install Certbot and the NGINX plugin
-  apt:
-    name:
-      - certbot
-      - python3-certbot-nginx
-    state: present
+#- name: Install Certbot and the NGINX plugin
+#  apt:
+#    name:
+#      - certbot
+#      - python3-certbot-nginx
+#    state: present
 
 
-- name: Obtain or renew SSL certificates with Certbot
-  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
+#- name: Obtain or renew SSL certificates with Certbot
+#  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
       
     
 - name : Copy the Nginx Conf file
@@ -30,3 +30,9 @@
   ansible.builtin.systemd:
     name: nginx
     state: reloaded
+
+- name: Ensure NGINX is running
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+    enabled: yes  # optional: ensure it starts on boot
