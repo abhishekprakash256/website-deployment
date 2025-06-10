@@ -88,6 +88,22 @@ $ export DOCKERHUB_PASSWORD="docker password"
 -  ansible-playbook -i inventory.ini ansible/rollback.yml -vvv
 
 
+the initial deplymnet instance type is t3.xlarge 
+
+scale down to t3.medium 
+works well
+
+t2.small works 
+
+ubuntu 
+
+20gb storage
+
+
+the mongo access service fails but can be started
+
+
+
 active the virtual env
 source /home/ubuntu/.venvs/global/bin/activate
 
