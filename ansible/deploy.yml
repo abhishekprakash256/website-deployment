@@ -15,10 +15,10 @@
     - name: Upgrade all packages to the latest version
       apt:
         upgrade: dist
-        update_cache: yes  
+        update_cache: yes    
 
 
-    - name: Install required system packages
+    - name: Install required system packages  
       apt:
         pkg:
           - python3-pip
