@@ -1,0 +1,39 @@
+- name: Run all APT cleanup commands manually
+  shell: |
+    apt-get autoclean -y
+    apt-get autoremove -y
+
+
+
+- name: Clean up journal logs older than 3 days
+  command: journalctl --vacuum-time=3d
+  ignore_errors: yes
+
+- name: Clean up large rotated logs
+  shell: rm -f /var/log/*.gz /var/log/*.[0-9]
+  ignore_errors: yes
+
+- name: Remove user-level npm, yarn, pip, and cache folders
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /home/ubuntu/.npm
+    - /home/ubuntu/.cache
+    - /home/ubuntu/.cache/yarn
+    - /home/ubuntu/.cache/pip
+    - /home/ubuntu/Downloads
+
+- name: Check if snapd is installed
+  stat:
+    path: /usr/bin/snap
+  register: snapd_status
+
+
+- name: Print disk usage after cleanup
+  shell: df -h
+  register: disk_usage
+
+- name: Show disk usage
+  debug:
+    var: disk_usage.stdout

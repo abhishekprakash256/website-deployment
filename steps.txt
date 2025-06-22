@@ -103,6 +103,18 @@ ubuntu
 the mongo access service fails but can be started
 
 
+The ports -
+
+nginx - 80, 443 , 27017
+nestjs api gateway service - 5001
+nextjs front end - 3000
+mongo access service - 5000
+tiny-url service - 5050
+static-media-server - 8080
+
+
+
+
 
 active the virtual env
 source /home/ubuntu/.venvs/global/bin/activate
