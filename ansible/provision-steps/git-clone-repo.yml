@@ -45,3 +45,11 @@
     dest: /home/ubuntu/tinyurl-service
     version: main
   become_user: ubuntu
+
+
+- name: Git Clone the academic website repository
+  ansible.builtin.git:
+    repo: 'git@github.com:abhishekprakash256/academic-website.git'
+    dest: /home/ubuntu/academic-website
+    version: main
+  become_user: ubuntu

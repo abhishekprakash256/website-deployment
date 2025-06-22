@@ -28,3 +28,8 @@
   ansible.builtin.file: 
     path: /home/ubuntu/tinyurl-service
     state: absent
+
+- name: Remove the academic website repository
+  ansible.builtin.file: 
+    path: /home/ubuntu/academic-website
+    state: absent

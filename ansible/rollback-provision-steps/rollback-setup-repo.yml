@@ -34,6 +34,13 @@
     enabled: false
   ignore_errors: true
 
+- name: Stop the academic website service
+  ansible.builtin.systemd:
+    name: academic-website-server
+    state: stopped
+    enabled: false
+  ignore_errors: true
+
 - name: Remove the systemd service file for personal portfolio frontend
   ansible.builtin.file:
     path: /etc/systemd/system/personal-portfolio-frontend.service
@@ -57,6 +64,12 @@
 - name: Remove the systemd service file for tinyurl service
   ansible.builtin.file: 
     path: /etc/systemd/system/tinyurl-server.service
+    state: absent
+  ignore_errors: true
+
+- name: Remove the systemd service file for academic website server
+  ansible.builtin.file:
+    path: /etc/systemd/system/academic-website-server.service
     state: absent
   ignore_errors: true
 

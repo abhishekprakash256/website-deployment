@@ -11,11 +11,17 @@
   command: docker network ls --filter name=my_network -q
   register: network_check
   changed_when: false
+  ignore_errors: true
 
 - name: Remove Docker network if present
   become: true
   command: docker network rm my_network
   when: network_check.stdout != ""
+
+- name: Prune Docker images, containers, volumes (optional)
+  command: docker system prune -a -f --volumes
+  when: clean_docker
+  ignore_errors: yes
 
 - name: Stop Docker service
   ansible.builtin.systemd:

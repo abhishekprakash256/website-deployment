@@ -43,6 +43,14 @@
     chdir: /home/ubuntu/tinyurl-service
   shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
 
+- name: Install Python dependencies in virtualenv for academic website
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/academic-website
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
+
 
 - name : Copy the personal portfolio frontend service file
   become: true
@@ -94,6 +102,17 @@
   ansible.builtin.copy:
     src: /home/ubuntu/tinyurl-service/tinyurl-server.service
     dest: /etc/systemd/system/tinyurl-server.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name : Copy the academic website service file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/academic-website/academic-website-server.service
+    dest: /etc/systemd/system/academic-website-server.service
     remote_src: yes
     owner: root
     group: root
@@ -176,6 +195,19 @@
     name: tinyurl-server
     state: started
 
+
+
+- name: Enable the academic website service
+  become: true
+  ansible.builtin.systemd:
+    name: academic-website-server
+    enabled: true
+
+- name: Start the academic website service
+  become: true
+  ansible.builtin.systemd:
+    name: academic-website-server
+    state: started
 
 - name : Copy the data file for mongo ingestion
   ansible.builtin.copy:

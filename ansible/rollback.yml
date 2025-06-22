@@ -33,6 +33,11 @@
       ansible.builtin.include_tasks:
         file: rollback-provision-steps/rollback-setup-repo.yml
 
+    - name: Clean up space
+      ansible.builtin.include_tasks:
+        file: rollback-provision-steps/clean-space.yml
+    
+
 
 
     
