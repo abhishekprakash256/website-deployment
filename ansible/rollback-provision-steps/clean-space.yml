@@ -23,6 +23,7 @@
     - /home/ubuntu/.cache/yarn
     - /home/ubuntu/.cache/pip
     - /home/ubuntu/Downloads
+    - /home/ubuntu/typesense-data
 
 - name: Check if snapd is installed
   stat:

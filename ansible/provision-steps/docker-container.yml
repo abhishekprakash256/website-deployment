@@ -23,3 +23,28 @@
       - name: my_network
     published_ports:
       - "6379:6379"
+
+
+
+- name: Run the Typesense container
+  become: true
+  community.docker.docker_container:
+    name: typesense
+    image: typesense/typesense:29.0.rc30
+    state: started
+    restart_policy: unless-stopped
+    networks:
+      - name: my_network
+    published_ports:
+      - "8108:8108"
+    volumes:
+      - "{{ ansible_env.PWD }}/typesense-data:/data"
+    command: >
+      --data-dir /data
+      --api-key={{ typesense_api_key }}
+      --enable-cors
+  vars:
+    typesense_api_key: test_key
+
+
+
