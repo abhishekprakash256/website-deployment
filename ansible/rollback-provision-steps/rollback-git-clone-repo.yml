@@ -33,3 +33,8 @@
   ansible.builtin.file: 
     path: /home/ubuntu/academic-website
     state: absent
+
+- name: Remove the academic website repository
+  ansible.builtin.file: 
+    path: /home/ubuntu/typesense-etl
+    state: absent
