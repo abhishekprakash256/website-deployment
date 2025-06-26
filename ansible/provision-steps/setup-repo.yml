@@ -51,6 +51,13 @@
   shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
 
 
+- name: Install Python dependencies in virtualenv for typesense-etl
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/typesense-etl
+  shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
+
 
 - name : Copy the personal portfolio frontend service file
   become: true
@@ -223,3 +230,10 @@
   args:
     chdir: /home/ubuntu/mongo-ingestion-and-testing
   shell: /home/ubuntu/.venvs/global/bin/python3 data_crud.py
+
+- name: Data ingestion operation for typesense
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/typesense-etl
+  shell: /home/ubuntu/.venvs/global/bin/python3 etl_typesense.py
