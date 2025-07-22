@@ -1,0 +1,3 @@
+Title -- making smart search with typesense 
+
+problem -- the search with mongo is not that fast and fuzzy matching is not that robust and multiple word matching is with atlas 
