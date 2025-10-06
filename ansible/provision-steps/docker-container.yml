@@ -25,6 +25,22 @@
       - "6379:6379"
 
 
+- name: Run PostgreSQL container
+  become: true
+  community.docker.docker_container:
+    name: postgres-container
+    image: postgres:latest
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "5432:5432"
+    env:
+      POSTGRES_USER: abhi
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: test_db
+    networks:
+      - name: my_network
+
 
 - name: Run the Typesense container
   become: true
