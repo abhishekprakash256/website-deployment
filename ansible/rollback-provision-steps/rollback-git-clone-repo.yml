@@ -34,7 +34,12 @@
     path: /home/ubuntu/academic-website
     state: absent
 
-- name: Remove the academic website repository
+- name: Remove the typesense repository
   ansible.builtin.file: 
     path: /home/ubuntu/typesense-etl
+    state: absent
+
+- name: Remove the chat service
+  ansible.builtin.file: 
+    path: /home/ubuntu/chat-service
     state: absent

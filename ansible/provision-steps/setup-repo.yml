@@ -59,6 +59,22 @@
   shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
 
 
+- name: Install Go dependencies for chat server
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/chat-service
+  shell: go mod tidy
+
+
+- name: Build Go chat server binary
+  become: true
+  become_user: ubuntu
+  args:
+    chdir: /home/ubuntu/chat-service/cmd
+  shell: go build -o main main.go
+
+
 - name : Copy the personal portfolio frontend service file
   become: true
   ansible.builtin.copy:
@@ -120,6 +136,17 @@
   ansible.builtin.copy:
     src: /home/ubuntu/academic-website/academic-website-server.service
     dest: /etc/systemd/system/academic-website-server.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name : Copy the chat server file
+  become: true
+  ansible.builtin.copy:
+    src: /home/ubuntu/chat-service/chat-server.service
+    dest: /etc/systemd/system/chat-server.service
     remote_src: yes
     owner: root
     group: root
@@ -215,6 +242,21 @@
   ansible.builtin.systemd:
     name: academic-website-server
     state: started
+
+
+- name: Enable the Chat server
+  become: true
+  ansible.builtin.systemd:
+    name: chat-server
+    enabled: true
+
+
+- name: Start the Chat server
+  become: true
+  ansible.builtin.systemd:
+    name: chat-server
+    state: started
+
 
 - name : Copy the data file for mongo ingestion
   ansible.builtin.copy:
