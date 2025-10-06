@@ -7,13 +7,6 @@
     version: main
   become_user: ubuntu
 
-- name: Git Clone the api Gateway Service repository
-  ansible.builtin.git:
-    repo: 'git@github.com:abhishekprakash256/api-gateway-service.git'
-    dest: /home/ubuntu/api-gateway-service
-    version: main
-  become_user: ubuntu
-
 
 - name: Git Clone the Blog Service repository
   ansible.builtin.git:
