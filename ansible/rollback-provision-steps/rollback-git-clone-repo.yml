@@ -14,9 +14,9 @@
     path: /home/ubuntu/mongo-access-service
     state: absent
 
-- name: Remove the static media server repository
+- name: Remove the static blog service
   ansible.builtin.file: 
-    path: /home/ubuntu/static-media-server
+    path: /home/ubuntu/blog-service
     state: absent
 
 - name: Remove the mongo ingestion and testing repository

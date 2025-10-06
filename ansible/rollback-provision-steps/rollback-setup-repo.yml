@@ -12,9 +12,9 @@
     enabled: false
   ignore_errors: true
 
-- name: Stop the mongo access service
+- name: Stop the Blog service
   ansible.builtin.systemd:
-    name: mongo-access
+    name: blog-service
     state: stopped
     enabled: false
   ignore_errors: true
@@ -51,9 +51,9 @@
     path: /etc/systemd/system/api-gateway.service
     state: absent
 
-- name: Remove the systemd service file for mongo access service
+- name: Remove the systemd service file for blog service
   ansible.builtin.file:
-    path: /etc/systemd/system/mongo-access.service
+    path: /etc/systemd/system/blog-service.service
     state: absent
 
 - name: Remove the systemd service file for static media server

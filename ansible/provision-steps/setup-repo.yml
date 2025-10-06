@@ -20,11 +20,11 @@
     npm run build
 
 
-- name: Install Python dependencies in virtualenv for mongo access service
+- name: Install Python dependencies in virtualenv for blog service
   become: true
   become_user: ubuntu
   args:
-    chdir: /home/ubuntu/mongo-access-service
+    chdir: /home/ubuntu/blog-service
   shell: /home/ubuntu/.venvs/global/bin/pip install -r requirements.txt
 
 
