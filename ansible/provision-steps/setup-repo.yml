@@ -97,11 +97,11 @@
     mode: '0644'
 
 
-- name : Copy the Mongo access service file
+- name : Copy the Blog service file
   become: true
   ansible.builtin.copy:
-    src: /home/ubuntu/mongo-access-service/mongo-access.service
-    dest: /etc/systemd/system/mongo-access.service
+    src: /home/ubuntu/blog-service/blog-service.service
+    dest: /etc/systemd/system/blog-service.service
     remote_src: yes
     owner: root
     group: root
@@ -159,17 +159,17 @@
     daemon_reload: true
 
 
-- name: Enable the mongo access service
+- name: Enable the blog service
   become: true
   ansible.builtin.systemd:
-    name: mongo-access
+    name: blog-service
     enabled: true
 
 
-- name: Start the mongo access service
+- name: Start the blog service
   become: true
   ansible.builtin.systemd:
-    name: mongo-access
+    name: blog-service
     state: started
 
 

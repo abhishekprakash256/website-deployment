@@ -15,10 +15,10 @@
   become_user: ubuntu
 
 
-- name: Git Clone the Mongo Access Service repository
+- name: Git Clone the Blog Service repository
   ansible.builtin.git:
-    repo: 'git@github.com:abhishekprakash256/mongo-access-service.git'
-    dest: /home/ubuntu/mongo-access-service
+    repo: 'git@github.com:abhishekprakash256/blog-service.git'
+    dest: /home/ubuntu/blog-service
     version: main
   become_user: ubuntu
 
