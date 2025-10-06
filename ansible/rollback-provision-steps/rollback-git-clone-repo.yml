@@ -4,19 +4,9 @@
     path: /home/ubuntu/personal-portfolio-frontend
     state: absent
 
-- name: Remove the Api Gateway Service repository
-  ansible.builtin.file:
-    path: /home/ubuntu/api-gateway-service
-    state: absent
-
-- name: Remove the Mongo Access Service repository
-  ansible.builtin.file:
-    path: /home/ubuntu/mongo-access-service
-    state: absent
-
-- name: Remove the static media server repository
+- name: Remove the static blog service
   ansible.builtin.file: 
-    path: /home/ubuntu/static-media-server
+    path: /home/ubuntu/blog-service
     state: absent
 
 - name: Remove the mongo ingestion and testing repository
