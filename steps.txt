@@ -111,6 +111,7 @@ nextjs front end - 3000
 mongo access service - 5000
 tiny-url service - 5050
 static-media-server - 8080
+chat server - 8050
 
 
 
