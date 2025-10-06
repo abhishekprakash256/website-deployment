@@ -5,12 +5,6 @@
     enabled: false
   ignore_errors: true
 
-- name: Stop the systemd service api gateway
-  ansible.builtin.systemd:
-    name: api-gateway
-    state: stopped
-    enabled: false
-  ignore_errors: true
 
 - name: Stop the Blog service
   ansible.builtin.systemd:
@@ -44,11 +38,6 @@
 - name: Remove the systemd service file for personal portfolio frontend
   ansible.builtin.file:
     path: /etc/systemd/system/personal-portfolio-frontend.service
-    state: absent
-
-- name: Remove the systemd service file for api gateway
-  ansible.builtin.file:
-    path: /etc/systemd/system/api-gateway.service
     state: absent
 
 - name: Remove the systemd service file for blog service
