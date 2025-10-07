@@ -33,3 +33,8 @@
   ansible.builtin.file: 
     path: /home/ubuntu/chat-service
     state: absent
+
+- name: Remove the static media server
+  ansible.builtin.file: 
+    path: /home/ubuntu/static-media-server
+    state: absent
