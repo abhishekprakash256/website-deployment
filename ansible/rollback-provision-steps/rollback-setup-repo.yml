@@ -65,7 +65,7 @@
 - name: Remove the systemd service file for chat server
   ansible.builtin.file:
     path: /etc/systemd/system/chat-server.service
-    state: absentc
+    state: absent
   ignore_errors: true
 
 - name: Reload systemd daemon after service removal

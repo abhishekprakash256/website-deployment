@@ -1,23 +1,23 @@
 # The following playbook installs NGINX, Certbot, and the NGINX plugin for Certbot, obtains SSL certificates, and configures NGINX to use them.
 
-- name: Install NGINX
-  apt:
-    name: nginx
-    state: present
+#- name: Install NGINX
+#  apt:
+#    name: nginx
+#    state: present
 
-- name: Install Certbot and the NGINX plugin
-  apt:
-    name:
-      - certbot
-      - python3-certbot-nginx
-    state: present
+#- name: Install Certbot and the NGINX plugin
+#  apt:
+#    name:
+#      - certbot
+#      - python3-certbot-nginx
+#    state: present
 
 
-- name: Obtain or renew SSL certificates with Certbot for web link
-  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
+#- name: Obtain or renew SSL certificates with Certbot for web link
+#  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d meabhi.me
 
-- name: Obtain or renew SSL certificates with Certbot for api link
-  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d api.meabhi.me
+#- name: Obtain or renew SSL certificates with Certbot for api link
+#  command: certbot certonly --non-interactive --nginx --agree-tos --email abhishekprakash47@gmail.com -d api.meabhi.me
  
     
 - name : Copy the Nginx Conf file
