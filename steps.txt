@@ -1,10 +1,13 @@
-#installation of nginx
+The guide or steps to use the 
 
--- make the aws instance allow the https and http traffic
 
-static ip of machine
 
+The ip is very imp don't release it 
 -- 3.128.143.84
+
+
+
+
 
 -- install docker --
 -- # Add Docker's official GPG key:
@@ -147,3 +150,31 @@ sudo systemctl daemon-reload
 sudo systemctl enable personal-portfolio-frontend
 sudo systemctl start personal-portfolio-frontend
 sudo systemctl status personal-portfolio-frontend
+
+
+
+
+
+make an aws instabce t3.xlarge can be tune down to t2.small
+
+use the ip that is imp 
+
+make use the abhi key for ssh 
+
+have 25 gb space 
+
+ubuntu as os 
+
+allow HTTPS , HTTP and SSH in network 
+
+run the deploy by uncommnt all nginx 
+
+
+
+this folder is in gdrive as well 
+put it in ccorrect location --
+under ansible/files
+it is done by ansible already
+files need to be copy from webiste-deploymnet 
+
+ansible/files/
