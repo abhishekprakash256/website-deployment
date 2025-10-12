@@ -54,6 +54,7 @@ ansible-playbook -i inventory.ini ansible/deploy.yml -vvv
 
 - For Testing and Checking a service don't reset the nginx certs as that are limited and comment the steps in nginx.yml in provsion steps 
 - In the rollback-provsion-steps as well the file -> rollback-nginx.yml
+- if there is no change into the nginx conf just commnet in the deploy and rollback as well 
 
 ### **Rollback**
 
