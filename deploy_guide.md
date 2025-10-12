@@ -49,6 +49,12 @@ Allow the following inbound connections:
 ansible-playbook -i inventory.ini ansible/deploy.yml -vvv
 ```
 
+
+### **Note**
+
+- For Testing and Checking a service don't reset the nginx certs as that are limited and comment the steps in nginx.yml in provsion steps 
+- In the rollback-provsion-steps as well the file -> rollback-nginx.yml
+
 ### **Rollback**
 
 ```bash
