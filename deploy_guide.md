@@ -364,10 +364,12 @@ sudo systemctl status personal-portfolio-frontend
 
 ```
 
-
+## Notes
 - For the Cors debug use these 
 
 Not need to activate cors in both server and nginx one can work prefer nginx doing the cors
+
+- After the deployment restart the blog-service with systemctl command 
 
 ### Debug Commnads --> 
 
