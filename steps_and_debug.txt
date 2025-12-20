@@ -1,13 +1,74 @@
-The guide or steps to use the 
+The guide or steps to use to deploy the whole webiste in AWS 
 
-
-
-The ip is very imp don't release it 
+using the ip --> 
 -- 3.128.143.84
+The ip is very imp don't release it 
+is imp as that is attached to Go Daddy console in the Hosting 
 
 
+The AWS Settings ---> 
+
+For deploying the machine use an instance 
+
+t3.Xlarge or similar as personal-portfolio-front takes resouce to build 
+
+Allow the connections --> 
+allow HTTPS , HTTP and SSH in network 
+
+For disk space choose atleast 20GB as it depleats per new development
+
+For OS configuration choose --> 
+Ubuntu latest
+
+For the ssh key choose --> 
+abhi key
+
+For deploying use the commands --> 
+- ansible-playbook -i inventory.ini ansible/deploy.yml -vvv
+
+For rollback use the commands --> 
+-  ansible-playbook -i inventory.ini ansible/rollback.yml -vvv
+
+After the deployment the Ec2 instance can be scale down to t2.small for using less resource
+
+Sometimes After the restart the blog-service can go down
+can be restarted with systmctl commands
+
+The ports used by the services --> 
+
+Docker Images and ports  --> 
+
+Redis 6379:6379
+Mongo  27017:27017
+Postgresql 5432:5432
+Typesense 8108:8108
 
 
+commands to run container-->
+
+docker run -d --name redis --network my_network -p 6379:6379 redis:latest
+
+docker run -d --name mongo --network my_network -p 27017:27017 mongo:latest
+
+docker run -d --name postgres-container \
+  -e POSTGRES_USER=abhi \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -e POSTGRES_DB=test_db \
+  -p 5432:5432 \
+  postgres
+
+docker run -d \
+  --name typesense \
+  --network my_network \
+  -p 8108:8108 \
+  -v $(pwd)/typesense-data:/data \
+  typesense/typesense:29.0.rc30 \
+  --data-dir /data \
+  --api-key=$TYPESENSE_API_KEY \
+  --enable-cors
+
+
+some docker commands to debug --> 
 
 -- install docker --
 -- # Add Docker's official GPG key:
@@ -24,9 +85,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
-
 -- sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
 
 -- docker run without sudo -
 
@@ -34,24 +93,25 @@ sudo apt-get update
     - sudo gpasswd -a $USER docker
 
 
-
--- install ansible --
-
--- pull the docekr image
-    - docker pull abhishekprakash256/personal-website-linux:latest
-
 -- make the docker network 
     - docker network create my_network
-
 
 -- run the docker conatiners
 
     - docker compose up -d (can save the steps)
     - docker compose down (to remove all)
 
-    -docker run -d --name mongo --network my_network -p 27017:27017 mongo:latest
-     docker run -d --name redis --network my_network -p 6379:6379 redis:latest
-     docker run -d --name personal-website --network my_network -p 5000:5000 abhishekprakash256/personal-website-linux
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- install nginx 
@@ -80,41 +140,16 @@ sudo apt-get update
 -- run the conatainer or before
 -- injest the data 
 
--- put the docker username and password replace the vars in machine
-$ export DOCKERHUB_USERNAME="docker username"
-$ export DOCKERHUB_PASSWORD="docker password"
-
-
-#run the ansisble playbook
-- ansible-playbook -i inventory.ini ansible/deployment.yml -vvv  #not working anymore
-- ansible-playbook -i inventory.ini ansible/deploy.yml -vvv
--  ansible-playbook -i inventory.ini ansible/rollback.yml -vvv
-
-
-the initial deplymnet instance type is t3.xlarge 
-
-scale down to t3.medium 
-works well
-
-t2.small works 
-
-ubuntu 
-
-20gb storage
-
-
-the mongo access service fails but can be started
-
 
 The ports -
 
 nginx - 80, 443 , 27017
-nestjs api gateway service - 5001
 nextjs front end - 3000
-mongo access service - 5000
 tiny-url service - 5050
 static-media-server - 8080
 chat server - 8050
+blog-service -5000
+acdemic-service - 5100
 
 
 
@@ -154,20 +189,6 @@ sudo systemctl status personal-portfolio-frontend
 
 
 
-
-make an aws instabce t3.xlarge can be tune down to t2.small
-
-use the ip that is imp 
-
-make use the abhi key for ssh 
-
-have 25 gb space 
-
-ubuntu as os 
-
-allow HTTPS , HTTP and SSH in network 
-
-run the deploy by uncommnt all nginx 
 
 
 
