@@ -362,7 +362,69 @@ sudo systemctl enable personal-portfolio-frontend.  #replace the service name
 sudo systemctl start personal-portfolio-frontend
 sudo systemctl status personal-portfolio-frontend
 
+
+#check the status of the services running in the system
+systemctl list-units --type=service --all
+systemctl list-units --type=service
+systemctl --failed
+systemctl list-units --type=service --state=running
+systemctl list-unit-files --type=service
+ss -tulpn.  #scan all services running on the ports
+ps aux
+ss -tpn     #check the out connections
+sudo systemctl list-timers       #list the services timers 
+
+
 ```
+
+
+### UFW commands --> 
+
+```bash
+
+# Reset any existing rules (optional but clean)
+sudo ufw reset
+
+# Set secure defaults
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# Allow and rate-limit SSH (prevents brute-force)
+sudo ufw limit ssh
+
+# Allow web traffic
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+#allow the logging 
+sudo ufw logging medium
+
+# Enable firewall
+sudo ufw enable
+
+# Verify status
+sudo ufw status verbose
+
+```
+
+
+### UFW help commands ---> 
+
+```bash
+
+sudo ufw status numbered
+sudo ufw status verbose
+sudo ufw reload
+sudo ufw delete <rule_number>
+sudo ufw reload
+sudo ufw disable
+sudo ufw logging on
+sudo ufw app list
+sudo ufw show added
+
+```
+
+
 
 ## Notes
 - For the Cors debug use these 
