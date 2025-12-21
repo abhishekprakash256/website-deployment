@@ -80,3 +80,13 @@
     - name : Run the setup repo file
       ansible.builtin.include_tasks:
         file: provision-steps/setup-repo.yml
+
+    - name: Clear the ssh keys for the GitHub
+      ansible.builtin.file:
+        path: /home/ubuntu/.ssh/id_rsa
+        state: absent
+
+    - name: Clear the ssh keys for the GitHub
+      ansible.builtin.file:
+        path: /home/ubuntu/.ssh/id_rsa.pub
+        state: absent
