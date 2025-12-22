@@ -9,6 +9,9 @@
 
 - The data is stored in the test_data.json 
 - The data is divided into the section as Project, Tech and Life as per article type 
+- The article data goes into section as follows -->
+    - article_name, slug,article_para, section_name, id_number are for the card data and render in the section page
+    - the title , image_src, article_para and markdown_data are for the blog page.
 - The data can be written into the file and then just pushed into the database 
 
 
