@@ -26,6 +26,10 @@
     - Second Approach
         - The data is put into the test_data.json
         - scp the file into the prod using the command
+        - Remove the old data file (Run the command)
+        ```bash
+            home/ubuntu/mongo-ingestion-and-testing$ rm test_data.json
+        ```
         - Run the command - 
             ```bash
             #inside the dir  /Users/abhi/website-deployment/ansible/files
