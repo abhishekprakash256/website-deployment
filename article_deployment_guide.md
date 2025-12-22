@@ -31,7 +31,41 @@
             #inside the dir  /Users/abhi/website-deployment/ansible/files
             scp test_data.json aws_machine:/home/ubuntu/mongo-ingestion-and-testing
             ```
-        - 
+        - rm the docker mongodb (Run the Command)
+            ```bash
+            docker rm -f mongo
+            ```
+        - rm the typesense conatiner (run the command)
+            ```bash
+            docker rm -f typesense
+            ```
+        - Install and run mongo db conatiner (run the command)
+            ```bash
+            docker run -d --name mongo --network my_network -p 27017:27017 mongo:latest
+            ```
+        - Install and run typesense conatiner (run the command)
+            ```bash
+            docker run -d \
+            --name typesense \
+            --network my_network \
+            -p 8108:8108 \
+            -v $(pwd)/typesense-data:/data \
+            typesense/typesense:29.0.rc30 \
+            --data-dir /data \
+            --api-key=test_key \
+            --enable-cors
+            ```
+        - Run the command to insert the data into mongo
+            ```bash
+            #int the dir /home/ubuntu/mongo-ingestion-and-testing
+            /home/ubuntu/.venvs/global/bin/python3 data_crud.py
+            ```
+
+        - Run the command to insert the data into typesense
+            ```bash
+            #int the dir /home/ubuntu/typesense-etl
+            /home/ubuntu/.venvs/global/bin/python3 etl_typesense.py
+            ```
 
 
 
