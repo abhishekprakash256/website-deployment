@@ -29,6 +29,19 @@
     - Second Approach
         - The data is put into the test_data.json
         - scp the file into the prod using the command
+        - The scp of files happen from the anisble/files/blog/section/<category>
+            ```bash
+            #example command , the file are put into the specific location as per static media server fetching
+
+            scp search-icon.jpg aws_machine:/home/ubuntu/static-media-server/blog/section/tech/typesense
+            ```
+        - The url in data set is designed based on the location of the file 
+
+            ```bash
+            #example URL
+            "https://api.meabhi.me/static-media-server/v1/static/blog/section/tech/typesense/search-icon.jpg
+            ```
+
         - Remove the old data file (Run the command)
         ```bash
             home/ubuntu/mongo-ingestion-and-testing$ rm test_data.json
