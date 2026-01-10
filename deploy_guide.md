@@ -375,6 +375,18 @@ ss -tpn     #check the out connections
 sudo systemctl list-timers       #list the services timers 
 
 
+
+#nginx commands
+sudo tail -f /var/log/nginx/access.log
+sudo tail -f /var/log/nginx/error.log
+
+
+sudo grep "key_word" /var/log/nginx/access.log
+sudo grep -i "googlebot" /var/log/nginx/access.log | grep key_word
+sudo ls /var/log/nginx/
+sudo tail -f /var/log/nginx/meabhi.access.log
+
+
 ```
 
 
