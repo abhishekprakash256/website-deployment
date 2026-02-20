@@ -390,6 +390,22 @@ sudo tail -f /var/log/nginx/meabhi.access.log
 ```
 
 
+
+### Checking the logs --> 
+
+```bash
+
+sudo journalctl -u your-service-name -f  #check the service logs like 
+sudo journalctl -u personal-portfolio-frontend -f
+sudo journalctl -u personal-portfolio-frontend.service  # to check all 
+
+
+ps aux --sort=-%cpu | head           #check the htop with usage
+
+```
+
+
+
 ### UFW commands --> 
 
 ```bash
