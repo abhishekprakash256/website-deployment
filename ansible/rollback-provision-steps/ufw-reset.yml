@@ -1,0 +1,18 @@
+# This file is for the reset of the ufw rules in the sever
+
+- name: Disable UFW
+  community.general.ufw:
+    state: disabled
+
+- name: Reset UFW to default (delete all rules)
+  command: ufw --force reset
+
+- name: Set default incoming policy to deny
+  community.general.ufw:
+    direction: incoming
+    policy: deny
+
+- name: Set default outgoing policy to allow
+  community.general.ufw:
+    direction: outgoing
+    policy: allow

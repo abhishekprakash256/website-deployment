@@ -1,0 +1,40 @@
+# This file is to setup the UFW rules in the sever for the ssh, port 22 and port 443 
+
+- name: Ensure UFW is installed
+  ansible.builtin.apt:
+      pkg:
+      name: ufw
+  state: present
+  update_cache: yes
+
+- name: Set default incoming policy to deny
+  community.general.ufw:
+    direction: incoming
+    policy: deny
+
+- name: Set default outgoing policy to allow
+  community.general.ufw:
+    direction: outgoing
+    policy: allow
+
+- name: Limit SSH
+  community.general.ufw:
+    rule: limit
+    port: 22
+    proto: tcp
+
+- name: Allow HTTP
+  community.general.ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: Allow HTTPS
+  community.general.ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
