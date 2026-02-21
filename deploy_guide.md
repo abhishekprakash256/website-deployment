@@ -349,6 +349,13 @@ The ports -
 - blog-service -5000
 - academic-webiste - 5100
 
+For the database -
+
+- mongo - 27017
+- redis - 6379
+- postgres - 5432
+- typesense - 8108
+
 ### Debug commands --> 
 
 ```bash
