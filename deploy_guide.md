@@ -394,6 +394,10 @@ sudo ls /var/log/nginx/
 sudo tail -f /var/log/nginx/meabhi.access.log
 
 
+#check the ports running 
+sudo ss -lntp
+
+
 ```
 
 
