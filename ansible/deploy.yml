@@ -83,7 +83,7 @@
 
     - name: Run the ufw setup
       ansible.builtin.include_tasks:
-        file: provision/ufw-setup.yml
+        file: provision-steps/ufw-setup.yml
 
     - name: Clear the SSH keys for GitHub
       ansible.builtin.file:
