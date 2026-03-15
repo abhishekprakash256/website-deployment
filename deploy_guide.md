@@ -16,6 +16,8 @@
 
 * Use: `t3.xlarge` (for deployment and build)
 * After deployment, you may scale down to: `t2.small` (to reduce cost)
+* Now use: `t4g.large` (for deployment and build). (ARM achitecture)
+* After deployment, you may scale down to: `t4g.small` (to reduce cost) (ARM achitecture)
 
 ### **Operating System**
 
