@@ -16,6 +16,8 @@
 
 * Use: `t3.xlarge` (for deployment and build)
 * After deployment, you may scale down to: `t2.small` (to reduce cost)
+* Now use: `t4g.large` (for deployment and build). (ARM achitecture)
+* After deployment, you may scale down to: `t4g.small` (to reduce cost) (ARM achitecture)
 
 ### **Operating System**
 
@@ -349,6 +351,13 @@ The ports -
 - blog-service -5000
 - academic-webiste - 5100
 
+For the database -
+
+- mongo - 27017
+- redis - 6379
+- postgres - 5432
+- typesense - 8108
+
 ### Debug commands --> 
 
 ```bash
@@ -387,7 +396,27 @@ sudo ls /var/log/nginx/
 sudo tail -f /var/log/nginx/meabhi.access.log
 
 
+#check the ports running 
+sudo ss -lntp
+
+
 ```
+
+
+
+### Checking the logs --> 
+
+```bash
+
+sudo journalctl -u your-service-name -f  #check the service logs like 
+sudo journalctl -u personal-portfolio-frontend -f
+sudo journalctl -u personal-portfolio-frontend.service  # to check all 
+
+
+ps aux --sort=-%cpu | head           #check the htop with usage
+
+```
+
 
 
 ### UFW commands --> 

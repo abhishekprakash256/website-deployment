@@ -1,0 +1,21 @@
+---
+- name: Remove CrowdSec, Lynis and lnav
+  apt:
+    name:
+      - crowdsec
+      - crowdsec-firewall-bouncer-iptables
+      - lnav
+      - lynis
+    state: absent
+    purge: yes
+    autoremove: yes
+
+
+- name: Remove CrowdSec directories
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/crowdsec
+    - /var/lib/crowdsec
+    - /var/log/crowdsec

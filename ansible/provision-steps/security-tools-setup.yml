@@ -1,0 +1,59 @@
+# Install security audit tools: CrowdSec, lnav, Lynis
+
+- name: Install CrowdSec and firewall bouncer
+  apt:
+    name:
+      - crowdsec
+      - crowdsec-firewall-bouncer-iptables
+    state: present
+    update_cache: yes
+
+# Change LAPI port BEFORE restarting service
+- name: Configure CrowdSec LAPI port to 9090
+  replace:
+    path: /etc/crowdsec/config.yaml
+    regexp: '127\.0\.0\.1:8080'
+    replace: '127.0.0.1:9090'
+  notify: Restart CrowdSec
+
+# Remove old credentials (forces regeneration)
+- name: Remove old local API credentials
+  file:
+    path: /etc/crowdsec/local_api_credentials.yaml
+    state: absent
+  notify: Restart CrowdSec
+
+# Update firewall bouncer configuration
+- name: Configure firewall bouncer to use port 9090
+  replace:
+    path: /etc/crowdsec/bouncers/crowdsec-firewall-bouncer.yaml
+    regexp: '127\.0\.0\.1:8080'
+    replace: '127.0.0.1:9090'
+  notify: Restart firewall bouncer
+
+# Install lnav
+- name: Install lnav
+  apt:
+    name: lnav
+    state: present
+
+# Install Lynis
+- name: Install Lynis
+  apt:
+    name: lynis
+    state: present
+
+
+# start the service 
+
+- name: Restart CrowdSec
+  systemd:
+    name: crowdsec
+    state: restarted
+    enabled: yes
+
+- name: Restart firewall bouncer
+  systemd:
+    name: crowdsec-firewall-bouncer
+    state: restarted
+    enabled: yes

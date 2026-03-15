@@ -8,9 +8,9 @@
     - name: Ping localhost
       ping:
 
-    - name : Rollback Nginx
-      ansible.builtin.include_tasks:
-        file : rollback-provision-steps/rollback-nginx.yml
+    #- name : Rollback Nginx
+    #  ansible.builtin.include_tasks:
+    #    file : rollback-provision-steps/rollback-nginx.yml
     
     - name: Rollback Git
       ansible.builtin.include_tasks:
@@ -36,6 +36,10 @@
     - name: Clean up space
       ansible.builtin.include_tasks:
         file: rollback-provision-steps/clean-space.yml
+
+    - name: Run the ufw setup
+      ansible.builtin.include_tasks:
+        file: rollback-provision-steps/ufw-reset.yml
     
 
 
