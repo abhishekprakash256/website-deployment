@@ -8,9 +8,9 @@
     - name: Ping localhost
       ping:
 
-    #- name : Rollback Nginx
-    #  ansible.builtin.include_tasks:
-    #    file : rollback-provision-steps/rollback-nginx.yml
+    - name : Rollback Nginx
+      ansible.builtin.include_tasks:
+        file : rollback-provision-steps/rollback-nginx.yml
     
     - name: Rollback Git
       ansible.builtin.include_tasks:

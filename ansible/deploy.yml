@@ -29,9 +29,9 @@
         state: latest
         update_cache: true
   
-    #- name : Run Nginx file and configurels
-    #  ansible.builtin.include_tasks:
-    #    file: provision-steps/nginx.yml
+    - name : Run Nginx file and configurels
+      ansible.builtin.include_tasks:
+        file: provision-steps/nginx.yml
 
     - name: Make git configurartion
       ansible.builtin.include_tasks:
