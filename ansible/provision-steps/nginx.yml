@@ -27,6 +27,14 @@
     owner: root
     group: root
     mode: '0644'
+
+- name : Copy the Nginx Conf file in /etc/nginx
+  ansible.builtin.copy:
+    src: files/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: '0644'
       
 
 - name: Reload NGINX
